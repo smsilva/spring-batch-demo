@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: spring-batch-demo
+
+  sql:
+    init:
+      mode: always
+
+  flyway:
+    enabled: true
+    locations: "classpath:db,filesystem:/opt/migration"
+
+    datasource:
+      url: jdbc:postgresql://localhost:5432/postgres
+      username: postgres
+      password: postgres
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+      show-sql: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+    initialize: false
+    continue-on-error: false
