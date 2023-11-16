@@ -4,3 +4,7 @@ spring:
     hibernate:
       ddl-auto: none
       show-sql: true
+
+logging:
+  level:
+    org.springframework: INFO

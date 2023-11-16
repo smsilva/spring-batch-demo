@@ -14,14 +14,14 @@ import org.springframework.transaction.PlatformTransactionManager;
 public class BatchConfig {
 
     @Bean
-    public Job job(JobRepository repository, Step step) {
+    public Job demoJob(JobRepository repository, Step step) {
         return new JobBuilder("demoJob", repository)
                 .start(step)
                 .build();
     }
 
     @Bean
-    public Step step(JobRepository repository, PlatformTransactionManager transactionManager) {
+    public Step firstStep(JobRepository repository, PlatformTransactionManager transactionManager) {
         return new StepBuilder("demoStep", repository)
                 .tasklet((contribution, chunkContext) -> {
                     System.out.println("Hello, World!");
