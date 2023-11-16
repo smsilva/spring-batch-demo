@@ -8,6 +8,10 @@ spring:
       ddl-auto: create-drop # create-drop, create, update, validate, none
       show-sql: true
 
+  batch:
+    job:
+      enabled: false
+
 logging:
   level:
     org.springframework: INFO

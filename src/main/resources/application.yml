@@ -2,8 +2,22 @@ spring:
   application:
     name: spring-batch-demo
 
+  batch:
+    jdbc:
+      initialize-schema: always # always, never, embedded
+
+    job:
+      enabled: true
+
   jpa:
     open-in-view: false
     hibernate:
       ddl-auto: update # create-drop, create, update, validate, none
       show-sql: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+    initialize: false # Execute the schema.sql and data.sql files on startup
+    continue-on-error: false
