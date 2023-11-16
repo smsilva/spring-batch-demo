@@ -1,4 +1,7 @@
 spring:
+  application:
+    name: spring-batch-demo
+
   jpa:
     open-in-view: false
     hibernate:

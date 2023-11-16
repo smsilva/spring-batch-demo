@@ -26,7 +26,7 @@ public class BatchConfig {
 
     @Bean
     public Step firstStep(PlatformTransactionManager transactionManager) {
-        return new StepBuilder("demoStep", repository)
+        return new StepBuilder("firstStep", repository)
                 .tasklet((contribution, chunkContext) -> {
                     System.out.println("Hello, World!");
                     return RepeatStatus.FINISHED;
