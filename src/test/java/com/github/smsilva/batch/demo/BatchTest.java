@@ -1,5 +1,6 @@
 package com.github.smsilva.batch.demo;
 
+import com.github.smsilva.batch.demo.config.BatchConfig;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,7 @@ import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.batch.test.context.SpringBatchTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
@@ -19,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBatchTest
 @SpringJUnitConfig
 @DataJpaTest
+@Import(value = {BatchConfig.class, BatchConfigTest.class})
 public class BatchTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BatchTest.class);
@@ -33,8 +36,11 @@ public class BatchTest {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+    @Autowired
+    private Job demoJob;
+
     @Test
-    public void jobShouldSuccessfullyComplete(@Autowired Job demoJob) throws Exception {
+    public void jobShouldSuccessfullyComplete() throws Exception {
         this.jobLauncherTestUtils.setJob(demoJob);
         this.jdbcTemplate.update("delete from CUSTOMER");
 
