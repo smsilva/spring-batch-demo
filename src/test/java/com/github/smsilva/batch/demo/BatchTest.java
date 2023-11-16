@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBatchTest
 @SpringJUnitConfig
 @DataJpaTest
-@Import(value = {BatchConfig.class, BatchConfigTest.class})
+@Import(value = {BatchConfig.class})
 public class BatchTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BatchTest.class);

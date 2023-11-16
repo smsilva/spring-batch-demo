@@ -2,7 +2,7 @@ spring:
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop # create-drop, create, update, validate, none
       show-sql: true
 
 logging:
