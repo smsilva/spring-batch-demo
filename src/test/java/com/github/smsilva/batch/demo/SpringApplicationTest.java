@@ -18,7 +18,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SpringApplicationTest {
 
     @Autowired
-    private JobLauncherTestUtils jobLauncherTestUtils;
+    Job demoJob;
+
+    @Autowired
+    JobLauncherTestUtils jobLauncher;
+
+    @Test
+    public void testDemoJob() throws Exception {
+        jobLauncher.setJob(demoJob);
+        JobExecution jobExecution = jobLauncher.launchJob();
+        assertEquals("COMPLETED", jobExecution.getExitStatus().getExitCode());
+    }
 
     @Autowired
     public void clearingDatabase(DataSource dataSource) {
@@ -30,15 +40,6 @@ class SpringApplicationTest {
         for (int i = 1; i <= 10; i++) {
             template.update("INSERT INTO customers(id, name) VALUES (?, ?)", i, "customer" + i);
         }
-    }
-
-    @Test
-    public void testJob(@Autowired Job demoJob) throws Exception {
-        this.jobLauncherTestUtils.setJob(demoJob);
-
-        JobExecution jobExecution = jobLauncherTestUtils.launchJob();
-
-        assertEquals("COMPLETED", jobExecution.getExitStatus().getExitCode());
     }
 
 }
