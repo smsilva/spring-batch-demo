@@ -3,6 +3,7 @@ package com.github.smsilva.batch.demo;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.batch.test.context.SpringBatchTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,12 @@ class SpringApplicationTest {
 
     @Test
     public void testDemoJob() throws Exception {
+        JobParameters jobParameters = jobLauncher.getUniqueJobParametersBuilder()
+                .addString("nome", "Sérgio")
+                .toJobParameters();
+
         jobLauncher.setJob(demoJob);
-        JobExecution jobExecution = jobLauncher.launchJob();
+        JobExecution jobExecution = jobLauncher.launchJob(jobParameters);
         assertEquals("COMPLETED", jobExecution.getExitStatus().getExitCode());
     }
 
