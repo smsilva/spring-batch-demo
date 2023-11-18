@@ -12,10 +12,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-public class BatchConfig {
+public class JobConfig {
 
     @Autowired
-    private JobRepository repository;
+    JobRepository repository;
+
+    @Autowired
+    PlatformTransactionManager transactionManager;
 
     @Bean
     public Job demoJob(Step firstStep) {
@@ -25,7 +28,7 @@ public class BatchConfig {
     }
 
     @Bean
-    public Step firstStep(PlatformTransactionManager transactionManager) {
+    public Step firstStep() {
         return new StepBuilder("firstStep", repository)
                 .tasklet((contribution, chunkContext) -> {
                     System.out.println("Hello, World!");
