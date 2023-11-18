@@ -1,4 +1,4 @@
-package com.github.smsilva.batch.demo.entity;
+package com.github.smsilva.batch.demo.data;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

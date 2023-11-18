@@ -1,6 +1,5 @@
-package com.github.smsilva.batch.demo.boundary;
+package com.github.smsilva.batch.demo.data;
 
-import com.github.smsilva.batch.demo.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long> {}

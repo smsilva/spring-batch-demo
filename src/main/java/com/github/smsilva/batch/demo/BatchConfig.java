@@ -1,4 +1,4 @@
-package com.github.smsilva.batch.demo.config;
+package com.github.smsilva.batch.demo;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
