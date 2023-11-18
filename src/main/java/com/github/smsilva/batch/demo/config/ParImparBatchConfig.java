@@ -3,6 +3,7 @@ package com.github.smsilva.batch.demo.config;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.job.builder.JobBuilder;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemWriter;
@@ -28,6 +29,7 @@ public class ParImparBatchConfig {
     @Bean
     public Job imprimeParImparJob(Step imprimeParImparStep) {
         return new JobBuilder("imprimeParImparJob", repository)
+                .incrementer(new RunIdIncrementer())
                 .start(imprimeParImparStep)
                 .build();
     }
@@ -35,7 +37,7 @@ public class ParImparBatchConfig {
     @Bean
     public Step imprimeParImparStep() {
         return new StepBuilder("imprimeParImparStep", repository)
-                .<Integer, String>chunk(1, transactionManager)
+                .<Integer, String>chunk(10, transactionManager)
                 .reader(contaAteDezReader())
                 .processor(parOuImparProcessor())
                 .writer(imprimeWriter())
