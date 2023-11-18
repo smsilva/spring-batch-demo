@@ -1,4 +1,4 @@
-package com.github.smsilva.batch.demo.config;
+package com.github.smsilva.batch.demo.job;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -15,35 +15,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-public class JobConfig {
+public class DemoJobConfig {
 
-    @Autowired
-    JobRepository repository;
+    private final JobRepository repository;
 
-    @Autowired
-    PlatformTransactionManager transactionManager;
+    public DemoJobConfig(JobRepository repository) {
+        this.repository = repository;
+    }
 
     @Bean
     public Job demoJob(Step firstStep) {
         return new JobBuilder("demoJob", repository)
                 .start(firstStep)
                 .build();
-    }
-
-    @Bean
-    public Step firstStep() {
-        return new StepBuilder("firstStep", repository)
-                .tasklet(imprimeOlaTaskLet(null), transactionManager)
-                .build();
-    }
-
-    @Bean
-    @StepScope
-    public Tasklet imprimeOlaTaskLet(@Value("#{jobParameters['nome']}") String nome) {
-        return (contribution, chunkContext) -> {
-            System.out.printf("Olá, %s!%n", nome);
-            return RepeatStatus.FINISHED;
-        };
     }
 
 }

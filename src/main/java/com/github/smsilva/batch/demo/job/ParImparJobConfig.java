@@ -1,4 +1,4 @@
-package com.github.smsilva.batch.demo.config;
+package com.github.smsilva.batch.demo.job;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @Configuration
-public class ParImparBatchConfig {
+public class ParImparJobConfig {
 
     @Autowired
     JobRepository repository;
