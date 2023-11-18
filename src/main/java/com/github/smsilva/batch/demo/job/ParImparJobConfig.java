@@ -9,7 +9,6 @@ import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.function.FunctionItemProcessor;
 import org.springframework.batch.item.support.IteratorItemReader;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -20,11 +19,13 @@ import java.util.stream.IntStream;
 @Configuration
 public class ParImparJobConfig {
 
-    @Autowired
-    JobRepository repository;
+    public final JobRepository repository;
+    public final PlatformTransactionManager transactionManager;
 
-    @Autowired
-    PlatformTransactionManager transactionManager;
+    public ParImparJobConfig(JobRepository repository, PlatformTransactionManager transactionManager) {
+        this.repository = repository;
+        this.transactionManager = transactionManager;
+    }
 
     @Bean
     public Job imprimeParImparJob(Step imprimeParImparStep) {
