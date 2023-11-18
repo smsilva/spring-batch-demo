@@ -8,6 +8,7 @@ spring:
 
     job:
       enabled: true
+      names: imprimeParImparJob
 
   jpa:
     open-in-view: false
